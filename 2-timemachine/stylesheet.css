@@ -13,7 +13,10 @@ body {
     overflow-x: visible;
 }
 
-
+.link-ref {
+    padding: 3em;
+    font-family:'Newsreader';
+}
 
 #sticky-nav-button {
     position: fixed;

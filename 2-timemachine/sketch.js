@@ -24,5 +24,7 @@ $("#start-button").click(function() {
 
 
 
+
+
 // https://css-tricks.com/an-explanation-of-how-the-intersection-observer-watches/
 
