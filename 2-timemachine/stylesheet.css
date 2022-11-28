@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200;0,6..72,300;0,6..72,400;1,6..72,200;1,6..72,300;1,6..72,400&display=swap');
 
+* {
+    margin: 0;
+}
+
 html {
     font-size: 14pt;
     scroll-behavior: smooth;
@@ -94,7 +98,7 @@ body {
 #book-container{
     display: grid;
     grid-template-columns: [first] auto [second] 640px [third] auto [forth];
-    overflow-y: scroll;
+    overflow: scroll;
     width: 100%;
     height: 800px;
 }  
@@ -127,19 +131,22 @@ body {
     position: relative;
     display: block;
     width: 100%;
-    height: 800px;
-    padding: 2em;
+    height: 100%;
+    top:auto;
+    /* padding: 2em; */
     margin: 0;
     background: linear-gradient(90deg, #F6F4F1 10.54%, #823030 58%);
 
 }
 
 #title {
-
+    margin: 0;
     font-family: 'Newsreader';
     font-weight: 400;
     font-size: 24px;
     text-align:left;
+
+    padding: 40px;
 
 }
 
@@ -147,6 +154,9 @@ body {
     font-family: 'Newsreader';
     font-weight: 400;
     font-size: 20px;
+    padding-left: 40px;
+    margin: 0;
+    
 
 }
 
@@ -154,6 +164,7 @@ body {
     display: block;
     position: absolute;
     top: 20em;
+    padding: 40px;
 
     background:none;
     border: none;
@@ -257,16 +268,15 @@ body {
 .annotation-space {
     position:fixed;
     display: block;
-    background-color: rgba(185, 123, 123, 0.7);
-    opacity: 0.5;
+    /* background-color: rgba(185, 123, 123, 0.7); */
     width: calc((100vw - 640px)/2);
-    height: 100%;
+    height: 100% ;
 }
 
 #space-left{
 
     /* background-color:rgb(29, 29, 29); */
-    border: 1px solid #F6F4F1;
+    /* border: 1px solid #F6F4F1; */
     left: 0;
 
 
@@ -275,21 +285,54 @@ body {
 #space-right{
     /* background-color: rgb(44, 44, 44); */
     right:0;
-    border: 1px solid #F6F4F1;
+    /* border: 1px solid #F6F4F1; */
 }
 
-.annotate{
+#space-left > .annotate{
     position:absolute;
     margin: 0;
     top: 25% ;
     left: 100px;
     width: 350px;
     height: 100px;
-    background-color: cornflowerblue;
+    opacity: 0.2;
+    background-color: rgb(159, 193, 255);
+}
+
+#space-right > .annotate{
+    position:absolute;
+    margin: 0;
+    top: 40% ;
+    right: 50px;
+    width: 350px;
+    height: 100px;
+    opacity: 0.2;
+    background-color: rgb(159, 193, 255);
 }
 
 #one {
     top: 1000px;
+}
+
+.tracking-box {
+    position: absolute;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%,0);
+    width: 640px;
+    height: 100px;
+    border: 3px solid #F6F4F1;
+    
+    z-index: 20;
+}
+
+.fade-in {
+    opacity:0;
+    transition: opacity 250ms ease-in;
+}
+
+.fade-in.appear {
+    opacity: 0.3;
 }
 
 

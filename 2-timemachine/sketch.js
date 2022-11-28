@@ -19,25 +19,68 @@ $(function(){
         scrollTop: $("#the-book").offset().top},
         'slow');
   });
+
+
+});
+
+const count = document.querySelectorAll('.fade-in');
+const sections = document.querySelectorAll('.highlight');
+
+if(!!window.IntersectionObserver){
+  let n = 0 // Number of annotations
+  
+  // const sectionOne = document.querySelector('.section1');
+  console.log(sections);
+  
+  console.log(count);
+  
+  const options = {
+    root: document.querySelector('.container'), // it is the view port;
+    threshold: 0.9,
+    rootMargin: " -150px 0px -450px 0px"
+  };
+  
+  const appearOnScroll = new IntersectionObserver
+    (function(entries,appearOnScroll)
+    {
+      entries.forEach(entry => {
+        if(!entry.isIntersecting){
+          entry.target.classList.remove('invoke');
+          entry.target.classList.remove('underline');
+          console.log(entry.target);
+
+          return;
+        } else {
+          console.log(entry);
+          entry.target.classList.add('underline');
+          entry.target.classList.add('invoke');
+          console.log(entry.target);
+          // appearOnScroll.unobserve(entry.target);
+        }
+      });
+  
+    },
+  options);
+  
+  sections.forEach(item => {
+    appearOnScroll.observe(item);
+  })
+}
+
+$("#book-page").on('scroll', function(){
+  for(i = 0; i< sections.length; i++){
+
+  }
+
 });
 
 
+// Work log:
+// Check https://www.smashingmagazine.com/2018/01/deferring-lazy-loading-intersection-observer-api/
+// Add individual id for each pair of invoke - annotate 
+// Add all the highlight and annotation
+// 
 
-const sectionOne = document.querySelector('.section1');
-// const sections = document.querySelectorAll('')
-
-const options = {
-  root: null, // it is the view port;
-  threshold: 1,
-  rootMargin: "-150px"
-};
-const observer = new IntersectionObserver(function(entries, observer){
-  entries.forEach(entry => {
-    console.log(entry);
-  })
-}, options);
-
-observer.observe(sectionOne);
 
 
 
