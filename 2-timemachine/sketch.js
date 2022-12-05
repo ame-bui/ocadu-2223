@@ -1,3 +1,8 @@
+const count = document.querySelectorAll('.annotate');
+const sections = document.querySelectorAll('.highlight');
+var height = $(window).height();
+var sp = document.getElementById('#space-left');
+
 $(function(){
   var $myDiv = $('#book-container');
   var $navDiv = $('.index-box');
@@ -20,11 +25,16 @@ $(function(){
         'slow');
   });
 
+  $('#marker-button').click(function(){
+    $('.myCanvas').toggle();
+  })
+  // console.log(pwidth);
+  let px = 100 + Math.random()* 400 ;
+  console.log(px);
 
 });
 
-const count = document.querySelectorAll('.fade-in');
-const sections = document.querySelectorAll('.highlight');
+
 
 if(!!window.IntersectionObserver){
   let n = 0 // Number of annotations
@@ -36,26 +46,59 @@ if(!!window.IntersectionObserver){
   
   const options = {
     root: document.querySelector('.container'), // it is the view port;
-    threshold: 0.9,
-    rootMargin: " -150px 0px -450px 0px"
+    threshold: 0.7,
+    rootMargin: " -100px 0px -400px 0px"
   };
   
   const appearOnScroll = new IntersectionObserver
     (function(entries,appearOnScroll)
     {
       entries.forEach(entry => {
-        if(!entry.isIntersecting){
-          entry.target.classList.remove('invoke');
-          entry.target.classList.remove('underline');
-          console.log(entry.target);
+        const item = entry.target;
+
+        if(entry.isIntersecting){
+          for (let box of count){
+            if(item.id){
+              if (box.matches('#'+ item.id)){
+                // box.style.opacity = "1";
+                box.classList.add('fade-out');
+                box.classList.add('appear');
+           
+
+              } else {
+              }
+            } 
+            
+          }
+
+          // .classList.add('appear');
+          console.log(item.id);
+          entry.target.classList.add('underline');
+          // entry.target.classList.add('invoke');
+          console.log(entry.target.className);
+          // appearOnScroll.unobserve(entry.target);
+
+
+        } 
+        
+        else {
+          for (const box of count){
+              box.classList.remove('appear');
+            }
+          
+
+          // item.classList.remove('invoke');
+          // item.classList.remove('underline');
+
+          // for (const box of count){
+          //   if (box.matches("#"+item.id)){
+          //     box.classList.add('appear');
+          //     console.log(box);
+          //   }
+          // }
+          console.log(item.className + " IS OUT");
 
           return;
-        } else {
-          console.log(entry);
-          entry.target.classList.add('underline');
-          entry.target.classList.add('invoke');
-          console.log(entry.target);
-          // appearOnScroll.unobserve(entry.target);
         }
       });
   
@@ -67,12 +110,6 @@ if(!!window.IntersectionObserver){
   })
 }
 
-$("#book-page").on('scroll', function(){
-  for(i = 0; i< sections.length; i++){
-
-  }
-
-});
 
 
 // Work log:
