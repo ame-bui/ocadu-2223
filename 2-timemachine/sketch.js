@@ -46,7 +46,7 @@ if(!!window.IntersectionObserver){
   
   const options = {
     root: document.querySelector('.container'), // it is the view port;
-    threshold: 0.7,
+    threshold: 0.8,
     rootMargin: " -100px 0px -400px 0px"
   };
   
