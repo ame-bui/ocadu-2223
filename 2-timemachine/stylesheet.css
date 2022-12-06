@@ -190,7 +190,7 @@ body {
     border: none;
     color:darkred;
 
-    font-family: 'Newsreader';
+    font-family: 'Newsreader', sans-serif;
     font-size: 20px;
 
 }
@@ -216,7 +216,7 @@ body {
     transform: translate(-50%, -50%);
     background: linear-gradient(270deg, #f1ede9 80.54%, #cf6712 102%);
 
-    font-family: 'Newsreader';
+    font-family: 'Newsreader', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15pt;
@@ -289,6 +289,13 @@ body {
 }
 
 .annotation-space {
+
+    font-family: 'Newsreader', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 13pt;
+    line-height: 1.1;
+
     position:fixed;
     display: block;
     /* background-color: rgba(185, 123, 123, 0.7); */
@@ -355,6 +362,7 @@ body {
     white-space: normal;
     border-radius: 5px;
 }
+
 
 
 
