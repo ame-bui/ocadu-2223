@@ -16,20 +16,19 @@ let treblePosY = 0;
 
 var minlowMid = 0;
 var maxlowMid = 100;
-var my_Speed = 5;
 
 let fft;
 var x = 0;
 
 
-let trebleEnergy;
-let sizeTrebleEnergy;
-var beatHoldFrames = 15;
-var beatThreshold = 0.2; 
+var beatHoldFrames = 18;
+var beatThreshold = 0.15; 
 var beatCutoff = 0;
 var beatDecayRate = 0.98;
 var framesSinceLastBeat = 0;
 var checkBeat = false;
+
+
 let bckgr,bg,pg;
 
 let p;
@@ -38,9 +37,6 @@ let text_item, text_item_index;
 let randArray = [];
 
 function preload() {
-
-// sound = loadSound("media/bdrmm - Bedroom - 06 (The Silence).mp3");
-// sound = loadSound("media/Dead Man Runnin’.mp3");
 
 sound = loadSound("media/long-season.mp3");
 // 
@@ -79,14 +75,11 @@ function setup() {
     textFont(font);
     textSize(12);
     for(let i = 0; i < p.length; i++){
-        textArray.push(...split(p[i], /[\s]+/));
+        textArray.push(...split(p[i], ","));
     }
     console.log(textArray);
     
-
-
 }
-
 
 function draw(){
     // bg.clear();
@@ -104,19 +97,17 @@ function draw(){
     let lowMidEnergy = fft.getEnergy("lowMid");
     let highEnergy = fft.getEnergy("highMid");
 
-    aniSpeed = map(level, 0, 0.2, 1, 4);
 
-
-    // Mapping energy
+/// Mapping energy
     lowMidEnergy = map(lowMidEnergy, 0, 255, 0, 100);
 
     midEnergy = map(midEnergy, 0, 255, 0, 100);
     
     highEnergy = map(highEnergy, 0, 255, 0, 100);
 
-    // Energy Position
+/// Energy Position
     let sizeLowMid = map(lowMidEnergy,minlowMid,maxlowMid,  height + originOffset, (height / 2) + 100);
-    let sizemidEnergy= map(midEnergy, 5 , 100, height+ originOffset , (height / 2) +100);
+    let sizemidEnergy= map(midEnergy, 5 , 100, height+ originOffset , (height / 2) +200);
     let sizehighEnergy = map( highEnergy, 5 ,maxlowMid, height+ originOffset, (height / 2)+ 200);
     
     histLowMid.push(sizeLowMid);
@@ -130,14 +121,13 @@ function draw(){
         pg = createGraphics(windowWidth, windowHeight);
     }
     
-    ///  Low Mid
+ ///  Low Mid
     for(var i = 0; i< histLowMid.length; i++){
         bg.push();
         bg.fill(255);
-
+        
         var y = histLowMid[i] + ogX;
         var x = i;
-
         if(x * 20 > width)
         {
             y = histLowMid[i] + originOffset;
@@ -149,15 +139,11 @@ function draw(){
         if (lowMidEnergy>1){
             bg.rect(x*20, y, 20, lowMidEnergy/2);
         }
-
         bg.pop();
-
-
     }
-    
-    ///  High Mid
-    // stroke("#4c44eb");
 
+    
+ ///  High Mid
     noStroke();
     fill(0);
     for(var l = 0; l< histHighMid.length; l++){
@@ -199,6 +185,7 @@ function draw(){
     }
     endShape();
 
+/// If there is a change of beat 
     if(checkBeat){
         drawingContext.filter = 'blur(10px) opacity(0.5)';
         pg.beginShape();
@@ -213,45 +200,18 @@ function draw(){
         pg.textFont(font);
         pg.textSize(15);
         pg.fill(0);
-        pg.text(random(textArray) + "\xa0" + random(textArray),  random(100,width), random(100,height) );
+        pg.text(random(textArray) + "\xa0" + random(textArray),  random(100,width - 100), random(100, height-25) );
        
     }
 
-    drawingContext.filter = 'blur(0)';
 
-    image(bg, 0, 0);
- 
-    image(pg, 0, 0);
-
-
-
-
-
-
+/// Drawing the two layer: 
+    image(bg, 0, 0); // The frequency layer
+    image(pg, 0, 0); // The beat-reactive layer
 
 }
 
-function windowResized(){
-    resizeCanvas(windowWidth, windowHeight);
-}
-
-function keyPressed() {
-    if (keyCode === ENTER){
-        if (sound.isPlaying()){
-            sound.stop();
-        }
-        else {
-            sound.play();
-        }
-    }
-    
-    if ( keyCode === SHIFT){
-        saveCanvas(canvas, "visual", "png");
-    }
-    // background(220);
-    
-  }
-
+/// Detecting the beat
   function detectBeat(level) {
     if (level  > beatCutoff && level > beatThreshold){
       onBeat();
@@ -272,10 +232,33 @@ function keyPressed() {
   }
   
   function onBeat() {
-    clear();
-    // bgcolor = color(random(50,255), random(50,255), random(100,200));
     checkBeat = true;
   }
+
+/// Key option
+function keyPressed() {
+    if (keyCode === 32){
+        pg.clear();
+
+        if (sound.isPlaying()){
+            sound.pause();
+        }
+        else {
+            sound.play();
+            pg.redraw();
+        }
+    }
+    
+    if ( keyCode === SHIFT){
+        saveCanvas(canvas, "visual", "png");
+    }    
+  }
+
+function windowResized(){
+    resizeCanvas(windowWidth, windowHeight);
+}
+
+
 
 
 
@@ -322,7 +305,3 @@ function keyPressed() {
 
 // getPeaks()
 // getOctaveBands()
-
-// References
-// http://modeleightysix.com/i-dont-wanna-go
-// 
