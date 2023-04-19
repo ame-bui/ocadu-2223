@@ -1,0 +1,112 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital@0;1&family=Newsreader:ital@0;1&display=swap");
+
+html {
+  font-size: 12pt;
+}
+
+body {
+  height: auto;
+  background-color: black;
+  /* overflow: visible; */
+}
+
+.wrapper {
+  /* display: flex; */
+  width: 3456px;
+  margin: 0;
+  padding: 0;
+  height: 4800px;
+  overflow-x: hidden;
+}
+
+.myPoster {
+  z-index: -1;
+}
+
+.box {
+  max-width: 1000px;
+  width: 600px;
+  min-width: 400px;
+  min-height: 50px;
+  height: auto;
+  margin: 10px;
+  padding: 20px;
+  background-color: rgb(0, 0, 0);
+  border: 1px solid rgb(255, 255, 255);
+  color: rgb(255, 255, 255);
+
+  overflow-y: scroll;
+
+  z-index: 2;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.circle-shape {
+  margin: 10px;
+  padding: 20px;
+  background-color: rgb(252, 252, 252);
+  /* border: 1px solid rgb(255, 255, 255); */
+  border-radius: 50%;
+  color: rgb(255, 255, 255);
+
+  overflow-y: scroll;
+
+  z-index: 2;
+}
+
+#review-box-1 {
+  position: absolute;
+  left: 200px;
+  top: 150px;
+  /* background-color: bisque; */
+}
+
+#review-box-2 {
+  position: absolute;
+  /* background-color: rgb(238, 165, 75); */
+}
+
+#tagline {
+  position: absolute;
+  margin: 50px;
+  /* padding: 20px; */
+  left: 200px;
+  top: 4600px;
+  width: 3000px;
+  font-size: 50pt;
+  font-family: "Newsreader", serif;
+}
+
+.btn {
+  background-color: #ffffff; /* Green */
+  border: 1px solid black;
+  color: rgb(0, 0, 0);
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 16px;
+  margin: 50px;
+  cursor: pointer;
+}
+
+@media print {
+  .btn {
+    display: none;
+  }
+}
