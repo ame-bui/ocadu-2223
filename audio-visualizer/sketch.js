@@ -195,19 +195,24 @@ function draw(){
         pg.fill(color(random(50,255), random(50,255), random(100,200)));
         pg.ellipse(random(50, width-200), random(0, height), random(100,300));
         
-        drawingContext.filter = 'blur(0)';
-
-        pg.textFont(font);
-        pg.textSize(15);
-        pg.fill(0);
-        pg.text(random(textArray) + "\xa0" + random(textArray),  random(100,width - 100), random(100, height-25) );
+        // pg.textFont(font);
+        // pg.textSize(15);
+        // pg.fill(0);
+        // pg.text(random(textArray) + "\xa0" + random(textArray),  random(100,width - 100), random(100, height-25) );
        
     }
 
 
 /// Drawing the two layer: 
+    // drawingContext.filter = 'blur(0px)';
+
     image(bg, 0, 0); // The frequency layer
-    image(pg, 0, 0); // The beat-reactive layer
+
+    // drawingContext.filter = 'blur(px)';
+
+    image(pg, 0, 0);
+
+    // The beat-reactive layer
 
 }
 
